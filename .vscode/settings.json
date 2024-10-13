@@ -1,3 +1,18 @@
 {
-    "makefile.configureOnOpen": true
+    "makefile.configureOnOpen": true,
+    "files.associations": {
+        "*.h": "c",
+        "array": "c",
+        "*.tcc": "c",
+        "string": "c",
+        "vector": "c",
+        "string_view": "c",
+        "functional": "c",
+        "limits": "c",
+        "ostream": "c",
+        "ranges": "c",
+        "streambuf": "c",
+        "tuple": "c",
+        "algorithm": "c"
+    }
 }

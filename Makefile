@@ -1,7 +1,6 @@
 clisp: main.c token.c
-	gcc -c main.c
-	gcc -c token.c
-	gcc main.o token.o -o clisp
+	gcc -c -g main.c token.c
+	gcc -g main.o token.o -o clisp
 
 clean:
-	rm clisp
+	rm clisp main.o token.o

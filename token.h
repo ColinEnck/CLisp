@@ -4,9 +4,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// type of data stored in a token:
+// a string or a pointer to another list
+enum TokenType
+{
+    STR,
+    PTR
+};
+
 struct Token
 {
-    char *str; // token
+    void *data; // token
+    enum TokenType type; // type of data (string or pointer to another list)
     struct Token *next; // next in linked list
 };
 
@@ -14,7 +23,7 @@ struct Token *newList();
 
 // returns -1 for failure, 0 for success
 // must have a head for the linked list
-int append(struct Token *head, char str[]);
+int append(struct Token *head, void *data, enum TokenType type);
 
 int printList(struct Token *head);
 

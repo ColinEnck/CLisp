@@ -160,12 +160,5 @@ struct Token *parse(char *line, int len)
         }
     }
 
-    printf("I made it 163\n");
-    
-    for (size_t i = 0; i < numSpace - 1; i++)
-    {
-        printf("%s\n", words[i]);
-    }
-
     return tokens;
 }

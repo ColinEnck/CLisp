@@ -1,3 +1,3 @@
-# My Lisp Interpreter
-Here is my repo for making a Lisp interpreter.\
+# CLisp
+Here is my repo for making a Lisp interpreter in the C programming language.\
 It is a work in progress.

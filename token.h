@@ -25,6 +25,13 @@ struct Token *newList();
 // must have a head for the linked list
 int append(struct Token *head, void *data, enum TokenType type);
 
+// returns last entry in linked list
+void *top(struct Token *head);
+
+// returns -1 for failure, 0 for success
+// removes last entry in linked list
+int pop(struct Token *head);
+
 int printList(struct Token *head);
 
 #endif

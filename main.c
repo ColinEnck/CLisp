@@ -21,9 +21,11 @@ int main(int argc, char const *argv[])
         for (len = 0; (c = getchar()) != '\n'; len++)
             line[len] = c;
         // split it into a list based on whitespace
-        parse(line, len);
+        head = parse(line, len);
+        printList(head);
     }
 
+    free(head);
     return 0;
 }
 
@@ -31,6 +33,11 @@ struct Token *parse(char *line, int len)
 {
     // will hold the tokenized code
     struct Token *tokens = newList();
+    // marks the current level in the linked list
+    // (allows for lists inside lists)
+    struct Token *level = tokens;
+    // stack of the levels deep the linked lsit is
+    struct Token *levels;
     // will hold the words of the line
     char **words;
     // number of spaces
@@ -38,12 +45,30 @@ struct Token *parse(char *line, int len)
     char *newLine = addSpaceParens(line);
     int newLen = lenStr(newLine);
     // length of `words`
-    int lenWords = countSpace(newLen);
+    int lenWords = countSpace(newLine);
     printf("\"%s\"\n", newLine);
 
     words = splitAtSpace(newLine);
+    append(levels, (struct Token *) level, PTR);
     for (int i = 0; i < countSpace(newLine); i++)
-        printf("\"%s\"\n", words[i]); 
+        if (strcmp(words[i], "") != 0)
+        {
+            if (strcmp(words[i], "(") == 0)
+            {
+                append(levels, (struct Token*) newList(), PTR);
+                level = top(levels);
+            }
+            else if (strcmp(words[i], ")") == 0)
+            {
+                pop(levels);
+                level = top(levels);
+            }
+            else append(level, (char *) words[i], STR);
+        }
 
+    free(level);
+    free(levels);
+    free(words);
+    free(newLine);
     return tokens;
 }

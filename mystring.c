@@ -1,6 +1,6 @@
 #include "mystring.h"
 
-lenStr(const char *str)
+int lenStr(const char *str)
 {
     int len;
     for (len = 0; str[len] != '\0'; len++);

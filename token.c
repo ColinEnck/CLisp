@@ -22,6 +22,24 @@ int append(struct Token *head, void *data, enum TokenType type)
     return 0;
 }
 
+void *top(struct Token *head)
+{
+    struct Token *current;
+    if (head == NULL) return (void *) -1;
+    current = head;
+    while (current->next != NULL) current = current->next;
+    return current->data;
+}
+
+int pop(struct Token *head)
+{
+    struct Token *current;
+    if (head == NULL) return -1;
+    current = head;
+    while (current->next != NULL) current = current->next;
+    free(current);
+}
+
 // returns -1 for failure, 0 for success
 int printList(struct Token *head)
 {
@@ -31,7 +49,7 @@ int printList(struct Token *head)
     while (current != NULL)
     {
         if (current->type == STR)
-            printf("%s\n", (char *) current->data);
+            printf("\"%s\"\n", (char *) current->data);
         else if (current->type == PTR)
             printList(current->data);
         current = current->next;

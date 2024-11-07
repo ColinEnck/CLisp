@@ -4,9 +4,10 @@
 #include <strings.h>
 #include "token.h"
 #include "mystring.h"
+#include "stack.h"
 
-// parses the line of lisp code
-struct Token *parse(char *line, int len);
+// tokenize the line
+struct Token *retWords(char *line, int len);
 
 int main(int argc, char const *argv[])
 {
@@ -21,7 +22,7 @@ int main(int argc, char const *argv[])
         for (len = 0; (c = getchar()) != '\n'; len++)
             line[len] = c;
         // split it into a list based on whitespace
-        head = parse(line, len);
+        head = retWords(line, len);
         printList(head);
     }
 
@@ -29,45 +30,31 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-struct Token *parse(char *line, int len)
+struct Token *retWords(char *line, int len)
 {
     // will hold the tokenized code
     struct Token *tokens = newList();
-    // marks the current level in the linked list
-    // (allows for lists inside lists)
-    struct Token *level = tokens;
-    // stack of the levels deep the linked lsit is
-    struct Token *levels;
     // will hold the words of the line
     char **words;
     // number of spaces
     int numSpace = 0;
     char *newLine = addSpaceParens(line);
-    int newLen = lenStr(newLine);
+    int newLen = strlen(newLine);
     // length of `words`
     int lenWords = countSpace(newLine);
     printf("\"%s\"\n", newLine);
 
     words = splitAtSpace(newLine);
-    append(levels, (struct Token *) level, PTR);
+
     for (int i = 0; i < countSpace(newLine); i++)
         if (strcmp(words[i], "") != 0)
         {
-            if (strcmp(words[i], "(") == 0)
-            {
-                append(levels, (struct Token*) newList(), PTR);
-                level = top(levels);
-            }
-            else if (strcmp(words[i], ")") == 0)
-            {
-                pop(levels);
-                level = top(levels);
-            }
-            else append(level, (char *) words[i], STR);
+            // if (strcmp(words[i], "(") != 0)
+            // {
+                append(tokens, (char *) words[i], STR);
+            // }
         }
 
-    free(level);
-    free(levels);
     free(words);
     free(newLine);
     return tokens;

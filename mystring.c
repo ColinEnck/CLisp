@@ -1,18 +1,11 @@
 #include "mystring.h"
 
-int lenStr(const char *str)
-{
-    int len;
-    for (len = 0; str[len] != '\0'; len++);
-    return len;
-}
-
 char *insertStr(const char *str, char c, int index)
 {
     int len;
     char *newStr;
 
-    len = lenStr(str);
+    len = strlen(str);
     newStr = malloc(len+1);
     if (newStr == NULL) exit(1);
 
@@ -26,7 +19,7 @@ char *insertStr(const char *str, char c, int index)
 int countSpace(const char *str)
 {
     int count = 0;
-    int len = lenStr(str);
+    int len = strlen(str);
     for (int i = 0; i < len - 1; i++)
         if (str[i] == ' ')
             count++;
@@ -37,7 +30,7 @@ int *findParens(const char *str)
 {
     int *locs;
     int j = 0, num = 0;
-    int len = lenStr(str);
+    int len = strlen(str);
 
     for (int i = 0; i < len; i++)
         if (str[i] == ')' || str[i] == '(')
@@ -64,7 +57,7 @@ char *addSpaceParens(const char *str)
     // locations of parentheses
     int *locsParen;
     int j = 0, newLen = 0;
-    int len = lenStr(str);
+    int len = strlen(str);
 
     for (int i = 0; i < len; i++)
         if (str[i] == '(' || str[i] == ')')
@@ -111,7 +104,7 @@ char **splitAtSpace(const char *str)
         }
         bzero(ret[i], LINSIZ);
     }
-    for (int i = 1; i < lenStr(str); i++)
+    for (int i = 1; i < strlen(str); i++)
     {
         if (str[i] == ' ') 
         {

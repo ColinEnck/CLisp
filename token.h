@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // type of data stored in a token:
 // a string or a pointer to another list

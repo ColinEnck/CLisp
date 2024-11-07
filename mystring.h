@@ -7,9 +7,6 @@
 
 #define LINSIZ 64
 
-// returns length of a string
-int lenStr(const char *str);
-
 // counts the number of space chars in a string
 int countSpace(const char *str);
 

@@ -7,4 +7,3 @@ struct Stack *newStack()
         return (struct Stack *) -1;
     else return stack;
 }
-

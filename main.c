@@ -1,3 +1,5 @@
+// TODO: 
+// - create stack to create embedded lists
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
